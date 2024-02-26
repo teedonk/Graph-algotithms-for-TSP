@@ -50,3 +50,27 @@ def bfs(graph, visualize=True): #dfs algorithm
                 # Mark the neighbor as visited and add to the queue
                 visited[neighbor] = True
                 queue.append(neighbor)
+    if visualize:
+        pos = nx.spring_layout(G)
+        nx.draw(G, pos, with_labels=True, font_weight='bold',
+                node_color=['red' if G.nodes[node].get('visited') else 'blue' for node in G.nodes()])
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+        plt.show()
+
+    return distances
+
+
+# File path to my dataset
+file_path = "https://people.sc.fsu.edu/~jburkardt/datasets/tsp/fri26_d.txt"
+
+# Load the dataset
+graph_data = load_dataset(file_path)
+
+# Run BFS algorithm with visualization
+distances = bfs(graph_data, visualize=True)
+
+# Print the distances
+for i, distance in enumerate(distances):
+    print(f"Distance from node 0 to node {i}: {distance}")
+
+
