@@ -75,3 +75,15 @@ def tsp(graph, visualize=True):
     print("Optimal Path:", path)
     print("Total Distance:", total_distance)
     return total_distance
+# File path to my dataset
+file_path = "https://people.sc.fsu.edu/~jburkardt/datasets/tsp/fri26_d.txt"
+
+# Load the dataset
+graph_data = load_dataset(file_path)
+
+# Run TSP algorithm with visualization
+total_distance = tsp(graph_data, visualize=True)
+
+# Print the total distance
+if total_distance is not None:
+    print("Total Distance:", total_distance)
