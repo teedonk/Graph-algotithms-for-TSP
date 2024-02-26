@@ -37,3 +37,16 @@ def bfs(graph, visualize=True): #dfs algorithm
                 if graph[current_node][neighbor] != 0 and not visited[neighbor]:
                     G.add_edge(current_node, neighbor)
                     edge_labels[(current_node, neighbor)] = graph[current_node][neighbor]
+        # Explore neighbors
+        for neighbor in range(num_nodes):
+            if not visited[neighbor]:
+                # Calculate total distance for the path
+                total_distance = distances[current_node] + graph[current_node][neighbor]
+
+                # Update distance if it is shorter
+                if total_distance < distances[neighbor]:
+                    distances[neighbor] = total_distance
+
+                # Mark the neighbor as visited and add to the queue
+                visited[neighbor] = True
+                queue.append(neighbor)
