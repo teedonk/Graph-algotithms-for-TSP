@@ -18,3 +18,22 @@ def bfs(graph, visualize=True): #dfs algorithm
     start_node = 0
     visited[start_node] = True
     distances[start_node] = 0
+
+    # Visualization setup
+    G = nx.Graph()
+    G.add_nodes_from(range(num_nodes))
+    edge_labels = {}
+
+    # Use deque for the queue to efficiently pop from the left
+    queue = deque([start_node])
+
+    while queue:
+        current_node = queue.popleft()
+
+        # Visualization: Highlight visited nodes
+        if visualize:
+            G.nodes[current_node]['visited'] = True
+            for neighbor in range(num_nodes):
+                if graph[current_node][neighbor] != 0 and not visited[neighbor]:
+                    G.add_edge(current_node, neighbor)
+                    edge_labels[(current_node, neighbor)] = graph[current_node][neighbor]
