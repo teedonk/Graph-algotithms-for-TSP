@@ -45,3 +45,36 @@ def dfs(graph, current_node, visited, path, visualize=True):
                 return dfs_result
 
     return None
+def tsp(graph, visualize=True):
+    num_nodes = len(graph)
+
+    # Start from the first node
+    start_node = 0
+
+    # Initialize visited nodes
+    visited = [False] * num_nodes
+
+    # Run DFS to find the optimal path
+    optimal_path = dfs(graph, start_node, visited, [], visualize)
+
+    if optimal_path is not None:
+        print("Optimal Path:", optimal_path)
+        total_distance = calculate_total_distance(optimal_path, graph)
+        print("Total Distance:", total_distance)
+        return total_distance
+    else:
+        print("No valid path found.")
+        return None
+
+# File path to my dataset
+file_path = "https://people.sc.fsu.edu/~jburkardt/datasets/tsp/fri26_d.txt"
+
+# Load the dataset
+graph_data = load_dataset(file_path)
+
+# Run TSP algorithm with visualization
+total_distance = tsp(graph_data, visualize=True)
+
+# Print the total distance
+if total_distance is not None:
+    print("Total Distance:", total_distance)
